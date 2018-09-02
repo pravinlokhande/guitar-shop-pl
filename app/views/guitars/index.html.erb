@@ -113,7 +113,7 @@
                           </div>
                         </div>
                         <div class="add">
-                          <button class="btn btn-danger my-cart-btn my-cart-btn1 " data-id="add_to_cart_<%= guitar.uid %>" data-name="<%= guitar.brand %>" data-summary="<%= guitar.description %>" data-price="<%= guitar.price %>" data-quantity="1" data-image="images/of.png">Add to Cart</button>
+                          <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
                         </div>
                       </div>
                     </div>
@@ -141,7 +141,7 @@
                             <div class="clearfix"></div>
                           </div>
                           <div class="add">
-                             <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong" data-summary="summary 1" data-price="1.50" data-quantity="1" data-image="images/of.png">Add to Cart</button>
+                             <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
                           </div>
                           
                         </div>
@@ -175,7 +175,7 @@
       });
     }
 
-    $('.my-cart-btn').myCart({
+    $('.my-cart-btn').onClick({
       classCartIcon: 'my-cart-icon',
       classCartBadge: 'my-cart-badge',
       affixCartIcon: true,

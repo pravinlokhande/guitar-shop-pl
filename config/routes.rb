@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   resources :line_items
   resources :carts
-  get 'welcome/index'
   resources :guitars
   # root 'welcome#index'
   root 'guitars#index'
