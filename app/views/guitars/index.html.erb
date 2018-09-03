@@ -70,7 +70,7 @@
     </div>
 
     <div class="cart" >
-      <span class="fa fa-shopping-cart my-cart-icon"><img src="<%= asset_path( 'cart-icon.jpg' ) %>" height="20" width="20" alt=""/><span class="badge badge-notify my-cart-badge"></span></span>
+      <span class=""><img src="<%= asset_path( 'cart-icon.jpg' ) %>" height="20" width="20" alt=""/><span class="badge badge-notify my-cart-badge"><%= LineItem.count %></span></span>
     </div>
     <div class="clearfix"></div>
     <div class="content-top ">
@@ -127,7 +127,7 @@
                       <div class="col-m margin-bottom-30">
                         <div class="mid-1">
                           <div class="women">
-                            <h6><a href="#"><%= guitar.brand %></h6>              
+                            <h6><a href="<%= guitar_path(guitar.id) %>"><%= guitar.brand %></a></h6>              
                           </div>
                           <div class="mid-2">
                             <p >Price: <em class="item_price"><%= guitar.price %></em></p>
@@ -140,10 +140,10 @@
                             <div class="starbox small ghosting"><%= guitar.description %></div>
                             <div class="clearfix"></div>
                           </div>
-                          <div class="add">
-                             <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
-                          </div>
                           
+                        </div>
+                        <div class="add">
+                           <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
                         </div>
                       </div>
                     </div>
