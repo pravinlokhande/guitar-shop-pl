@@ -29,7 +29,6 @@ class LineItemsController < ApplicationController
     guitar = Guitar.find(params[:guitar_id])
     @line_item = @cart.add_guitar(guitar)
     respond_to do |format|
-      byebug
       if @line_item.cart.save
         format.html { redirect_to cart_path(@line_item.cart), notice: 'Item added to cart.' }
         format.json { render :show, status: :created, location: @line_item }
