@@ -1,22 +1,43 @@
-<p id="notice"><%= notice %></p>
-
+<p id="notice">
+    <%= notice %>
+</p>
 <!-- <%= link_to 'Edit', edit_cart_path(@cart) %> |
 <%= link_to 'Back', carts_path %> -->
-
-<section class="section col-md-6 dom-center">
-  <h2 class="title text-center" id="myCartShow"> My Cart</h2>
-  <div class="pull-right">
-	<%= link_to 'Keep Shopping', url_for(root_path), class: 'h3' %>
-  </div>
-  <%= render(@cart.line_items) %>
-  <div class="columns col-md-12">
-    <div class="column col-md-6 pull-left">
-      <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "btn btn-danger" %>
+<section class="col-md-6 dom-center">
+    <h2 class="title text-center" id="myCartShow"> My Cart</h2>
+    <div class="pull-right">
+        <%= link_to 'Keep Shopping', url_for(root_path), class: 'h3' %>
     </div>
-    <div class="column total has-text-right col-md-6">
-      <h4 class="title is-4 pull-right">
-        <span class="f5 has-text-grey">Total:</span> <%= number_to_currency(@cart.total_price) %>
+    <table class="table table-hover table-responsive col-md-12" id="cart-table">
+        <th class="">
+            <td class="col-md-4 text-left">
+                Product ID
+            </td>
+            <td class="col-md-3">
+                Brand Name
+            </td>
+            <td class="col-md-3">
+                Model Name
+            </td>
+            <td class="col-md-3">
+                Quantity
+            </td>
+            <td class="col-md-3">
+                Price
+            </td>
+        </th>
+        <tr>
+            <%= render(@cart.line_items) %>
+        </tr>
+    </table>
+    <div class="columns col-md-12">
+        <div class="column col-md-6 pull-left">
+            <%= button_to 'Empty Cart', @cart, method: :delete, data: { confirm: "Are you sure? " }, class: "btn btn-danger" %>
+        </div>
+        <div class="column total has-text-right col-md-6">
+            <h4 class="title is-4 pull-right">
+        <span class="f5 has-text-grey">Total:</span> <%= number_to_currency(@cart.total_price, :unit=> "Rs.") %>
       </h4>
+        </div>
     </div>
-  </div>
 </section>
