@@ -1,12 +1,21 @@
 class GuitarsController < ApplicationController
+  protect_from_forgery
+  skip_before_action :verify_authenticity_token, if: :verified_request?
   before_action :set_guitar, only: [:show, :edit, :update, :destroy]
+  include GuitarsHelper
 
+  def initialize
+    super
+    @allow_unsafe_access = %i[get_search_results]
+  end
   # GET /guitars
   # GET /guitars.json
   def index
     @guitars = Guitar.all
     @electric = Guitar.where(model: "Electric")
     @acoustic = Guitar.where(model: "Acoustic")
+    @brands = Guitar.pluck(:brand).uniq!
+    @models = Guitar.pluck(:model).uniq!
   end
 
   # GET /guitars/1
@@ -61,6 +70,12 @@ class GuitarsController < ApplicationController
       format.html { redirect_to guitars_url, notice: 'Guitar was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def get_search_results
+    query = params[:query_text]
+    result = get_suggestions(query)
+    render json: { "result": result }
   end
 
   private

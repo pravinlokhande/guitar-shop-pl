@@ -6,12 +6,13 @@
         <div class="banner-info">
             <h3>Type and search for guitars </h3>
             <div class="search-form">
-                <form action="#" method="post">
-                    <input type="text" placeholder="Type and search for Guitars" name="Search...">
-                    <input type="submit" value="GO">
-                </form>
+                <input id="search_guitar_input_box" type="text" placeholder="Type and search for Guitars" name="Search...">
+                <input id="search_guitars" type="submit" value="GO">
+                <h5 id="search_results_details"></h5>
             </div>
+            
         </div>
+        <div id="results" class="display-search-results"></div>
         <div class="text-right col-md-6 dom-center">
             <span class="">
               <img src="<%= asset_path( 'cart-icon.jpg' ) %>" height="20" width="20" alt=""/>
@@ -20,82 +21,104 @@
         </div>
         <div class="content-top ">
             <div class="container ">
-                <div class="spec ">
-                    <h3>Guitar List</h3>
-                    <div class="ser-t">
-                        <b></b>
-                        <span><i></i></span>
-                        <b class="line"></b>
+                <div class="col-md-12">
+                    <div class="spec ">
+                        <h3>Guitar List</h3>
+                        <div class="ser-t">
+                            <b></b>
+                            <span><i></i></span>
+                            <b class="line"></b>
+                        </div>
                     </div>
-                </div>
-                <div class="tab-head ">
-                    <nav class="nav-sidebar">
-                        <ul class="nav tabs ">
-                            <li class="active"><a href="#tab1" data-toggle="tab">Electric Guitars</a></li>
-                            <li class=""><a href="#tab2" data-toggle="tab">Acoustic Guitars</a></li>
-                        </ul>
-                    </nav>
-                    <div class=" tab-content tab-content-t ">
-                        <div class="tab-pane active text-style" id="tab1">
-                            <div class=" con-w3l">
-                                <% @electric.each do |guitar| %>
-                                    <div class="col-md-3 m-wthree">
-                                        <div class="col-m margin-bottom-30">
-                                            <div class="mid-1">
-                                                <div class="women">
-                                                    <h6><a href="<%= guitar_path(guitar.id) %>"><%= guitar.brand %></a></h6>
-                                                </div>
-                                                <div class="mid-2">
-                                                    <p>Price: <em class="item_price"><%= guitar.price %></em></p>
-                                                    <div class="block">
-                                                        <div class="starbox small ghosting"></div>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="mid-3">
-                                                    <div class="starbox small ghosting">
-                                                        <%= guitar.description %>
-                                                    </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                            </div>
-                                            <div class="add">
-                                                <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
-                                            </div>
-                                        </div>
+                    <div class="tab-head ">
+                        <nav class="nav-sidebar">
+                            <ul class="nav tabs ">
+                                <li class="active"><a href="#tab1" data-toggle="tab">Electric Guitars</a></li>
+                                <li class=""><a href="#tab2" data-toggle="tab">Acoustic Guitars</a></li>
+                            </ul>
+                        </nav>
+                        <div class="col-md-3">
+                            <div class="row-md-3">
+                                <h4>Brands</h4>
+                                <% @brands.each_with_index do |b, i| %>
+                                    <div>
+                                        <input id="#{b}_brand" type="checkbox" value="#{b}">
+                                        <label for="#{b}_brand"><%= b %></label>
                                     </div>
-                                    <% end %>
+                                <% end %>
+                            </div>
+                            <div class="row-md-3">
+                                <h4>Models</h4>
+                                <% @models.each_with_index do |model, i| %>
+                                    <div>
+                                        <input id="#{model}_model" type="checkbox" value="#{model}">
+                                        <label for="#{model}_model"><%= model %></label>
+                                    </div>
+                                <% end %>
                             </div>
                         </div>
-                        <div class="tab-pane  text-style" id="tab2">
-                            <div class=" con-w3l">
-                                <% @acoustic.each do |guitar| %>
-                                    <div class="col-md-3 m-wthree">
-                                        <div class="col-m margin-bottom-30">
-                                            <div class="mid-1">
-                                                <div class="women">
-                                                    <h6><a href="<%= guitar_path(guitar.id) %>"><%= guitar.brand %></a></h6>
-                                                </div>
-                                                <div class="mid-2">
-                                                    <p>Price: <em class="item_price"><%= guitar.price %></em></p>
-                                                    <div class="block">
-                                                        <div class="starbox small ghosting"></div>
+                        <div class=" tab-content tab-content-t col-md-9">
+                            <div class="tab-pane active text-style" id="tab1">
+                                <div class=" con-w3l">
+                                    <% @electric.each do |guitar| %>
+                                        <div class="col-md-3 m-wthree">
+                                            <div class="col-m margin-bottom-30">
+                                                <div class="mid-1">
+                                                    <div class="women">
+                                                        <h6><a href="<%= guitar_path(guitar.id) %>"><%= guitar.brand %></a></h6>
                                                     </div>
-                                                    <div class="clearfix"></div>
-                                                </div>
-                                                <div class="mid-3">
-                                                    <div class="starbox small ghosting">
-                                                        <%= guitar.description %>
+                                                    <div class="mid-2">
+                                                        <p>Price: <em class="item_price"><%= guitar.price %></em></p>
+                                                        <div class="block">
+                                                            <div class="starbox small ghosting"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
                                                     </div>
-                                                    <div class="clearfix"></div>
+                                                    <div class="mid-3">
+                                                        <div class="starbox small ghosting">
+                                                            <%= guitar.description %>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="add">
-                                                <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
+                                                <div class="add">
+                                                    <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <% end %>
+                                        <% end %>
+                                </div>
+                            </div>
+                            <div class="tab-pane  text-style" id="tab2">
+                                <div class=" con-w3l">
+                                    <% @acoustic.each do |guitar| %>
+                                        <div class="col-md-3 m-wthree">
+                                            <div class="col-m margin-bottom-30">
+                                                <div class="mid-1">
+                                                    <div class="women">
+                                                        <h6><a href="<%= guitar_path(guitar.id) %>"><%= guitar.brand %></a></h6>
+                                                    </div>
+                                                    <div class="mid-2">
+                                                        <p>Price: <em class="item_price"><%= guitar.price %></em></p>
+                                                        <div class="block">
+                                                            <div class="starbox small ghosting"></div>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                    <div class="mid-3">
+                                                        <div class="starbox small ghosting">
+                                                            <%= guitar.description %>
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
+                                                </div>
+                                                <div class="add">
+                                                    <%= button_to "Add to cart", line_items_path(guitar_id: guitar), class: "btn btn-danger my-cart-btn my-cart-btn1 " %>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% end %>
+                                </div>
                             </div>
                         </div>
                     </div>

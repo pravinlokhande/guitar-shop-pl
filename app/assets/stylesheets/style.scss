@@ -503,7 +503,7 @@ span.fa.fa-shopping-cart.my-cart-icon {
   display: inline-block;
 }
 .search-form input[type='submit']:hover {
-  background: url(../images/can.png) no-repeat 6px 7px #039445;
+  background: no-repeat 6px 7px #039445;
   transition: 0.5s all;
   -webkit-transition: 0.5s all;
   -moz-transition: 0.5s all;
@@ -2889,7 +2889,7 @@ img.img-head {
 .search-form input[type='submit'] {
     width: 35px;
     height: 35px;
-    background: url(../images/can.png) no-repeat 4px 3px #FCCD1E;
+    background: no-repeat 4px 3px #FCCD1E;
 }
 .search-form input[type='text'] {
     width: 85%;
